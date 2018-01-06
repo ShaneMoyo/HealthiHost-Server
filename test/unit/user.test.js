@@ -34,5 +34,5 @@ describe('User model', () => {
     assert.equal(errors.firstName.kind, 'String');
     assert.equal(errors.lastName.kind, 'String');
     assert.equal(errors.hash.kind, 'String');
-});
+  });
 })
