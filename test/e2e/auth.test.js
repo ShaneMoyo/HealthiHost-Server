@@ -25,13 +25,14 @@ describe('Auth API', () => {
     assert.ok(token);
   });
 
-  it.skip('throws error if email already exists',() => {
+  it('throws error if email already exists',() => {
     return request.post('/api/users')
         .set('Authorization', token)
         .send({
-            email: 'teststaff@test.com',
-            name: 'Test staff',
-            password: 'password'
+          email: 'test@test.com',
+          firstName: 'first name',
+          lastName: 'last name',
+          roles: ['admin']
         })
         .then(
             () => { throw new Error('Unexpected successful response'); },
