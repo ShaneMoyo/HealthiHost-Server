@@ -1,1 +1,1 @@
-# HealthiHost
+# Server for HealthiHost web app
