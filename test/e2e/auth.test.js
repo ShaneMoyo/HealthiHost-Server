@@ -24,5 +24,21 @@ describe('Auth API', () => {
   it('Should generate a token on signup', () => {
     assert.ok(token);
   });
-  
+
+  it.skip('throws error if email already exists',() => {
+    return request.post('/api/users')
+        .set('Authorization', token)
+        .send({
+            email: 'teststaff@test.com',
+            name: 'Test staff',
+            password: 'password'
+        })
+        .then(
+            () => { throw new Error('Unexpected successful response'); },
+            err => {
+                assert.equal(err.status, 400);
+            }
+        );
+});
+
 })
