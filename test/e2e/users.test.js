@@ -40,6 +40,6 @@ describe('Auth API', () => {
                 assert.equal(err.status, 400);
             }
         );
-});
+  });
 
 })
