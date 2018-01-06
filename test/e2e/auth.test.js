@@ -26,8 +26,7 @@ describe('Auth API', () => {
   });
 
   it('throws error if email already exists',() => {
-    return request.post('/api/users')
-        .set('Authorization', token)
+    return request.post('/api/auth')
         .send({
           email: 'test@test.com',
           firstName: 'first name',
@@ -41,5 +40,22 @@ describe('Auth API', () => {
             }
         );
   });
+
+  it('Should throw an error if password is not included', () => {
+    return request.post('/api/auth')
+        .send({ 
+            email: 'test2@test.com',
+            firstName: 'first name',
+            lastName: 'last name',
+            roles: ['admin'],
+            password: ''
+        })
+        .then(
+            () => { throw new Error('Unexpected successful response'); },
+            err => {
+                assert.equal(err.status, 400);
+            }
+        );       
+});
 
 })
