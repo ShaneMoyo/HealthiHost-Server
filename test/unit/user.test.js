@@ -20,5 +20,19 @@ describe('User model', () => {
     assert.equal(errors.firstName.kind, 'required');
     assert.equal(errors.lastName.kind, 'required');
     assert.equal(errors.hash.kind, 'required');
-  })
+  });
+
+  it('Should throw errors for incorrect data types', () => {
+    const user = new User({
+        email: {},
+        firstName: {},
+        lastName: {},
+        hash: {}
+    });
+    const { errors } = user.validateSync();
+    assert.equal(errors.email.kind, 'String');
+    assert.equal(errors.firstName.kind, 'String');
+    assert.equal(errors.lastName.kind, 'String');
+    assert.equal(errors.hash.kind, 'String');
+});
 })
