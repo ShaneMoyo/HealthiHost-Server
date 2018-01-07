@@ -4,7 +4,7 @@ const Appointment = require('../../lib/models/appointment');
 
 
 describe('Appointments API', () => {
-  //working on saving an appointment
+
   it('Should validate a good model', () => {
     const appointment = new Appointment({
       service: 'Massage', 
@@ -14,6 +14,18 @@ describe('Appointments API', () => {
     });
     assert.equal(appointment.validateSync(), undefined)
   });
+
+  it('Should throw error for missing fields', () => {
+    const appointment = new Appointment({});
+    const { errors } = appointment.validateSync();
+    assert.equal(errors.service.kind, 'required');
+    assert.equal(errors.user.kind, 'required');
+    assert.equal(errors.date.kind, 'required');
+    assert.equal(errors.fulfilled.kind, 'required');
+  });
+
+  
+
 
 
 })
