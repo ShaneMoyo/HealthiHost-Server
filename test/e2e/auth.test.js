@@ -18,7 +18,7 @@ describe('Auth API', () => {
             password: 'password'
             
         })
-        .then(({ body }) => assert.ok(body.token))
+        .then(({ body: token }) => assert.ok(token))
   });
 
   it('throws error if email already exists',() => {
