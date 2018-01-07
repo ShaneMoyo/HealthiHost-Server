@@ -3,7 +3,7 @@ const Appointment = require('../../lib/models/appointment');
 
 
 
-describe('Appointments API', () => {
+describe('Appointments Model', () => {
 
   it('Should validate a good model', () => {
     const appointment = new Appointment({
