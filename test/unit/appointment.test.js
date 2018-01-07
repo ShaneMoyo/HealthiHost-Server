@@ -37,9 +37,4 @@ describe('Appointments API', () => {
     assert.equal(errors.date.kind, 'Date');
     assert.equal(errors.fulfilled.kind, 'Boolean');
   });
-
-
-
-
-
 })
