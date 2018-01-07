@@ -45,7 +45,7 @@ describe('Appointments API', () => {
         assert.ok(savedAppointemnt._id);
         assert.equal(savedAppointemnt.date, testAppointments[0].date);
         assert.equal(savedAppointemnt.service, testAppointments[0].service);
-        assert.equal(savedAppointemnt.fulfilled, testAppointments[0].fulfilled);
+        assert.equal(savedAppointemnt.fulfilled, testAppointments[0].fulfilled)
       });
   });
 
