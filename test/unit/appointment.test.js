@@ -33,7 +33,7 @@ describe('Appointments API', () => {
     });
     const { errors } = appointment.validateSync();
     assert.equal(errors.service.kind, 'String');
-    assert.equal(errors.user.kind, 'String');
+    assert.equal(errors.user.kind, 'ObjectID');
     assert.equal(errors.date.kind, 'Date');
     assert.equal(errors.fulfilled.kind, 'Boolean');
   });
