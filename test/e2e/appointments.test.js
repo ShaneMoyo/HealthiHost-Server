@@ -76,8 +76,10 @@ describe('Appointments API', () => {
           .set('Authorization', adminToken)
           .then(({ body: gotAppointemnts}) => {
             gotAppointemnts = gotAppointemnts.sort((a, b) => a._id < b._id);
-            savedAppointemnts = saveAppointemnts.sort((a, b) => a._id < b._id);
-            assert.deepEqual(savedAppointemnts, gotAppointemnts);
+            savedAppointemnts = savedAppointemnts.sort((a, b) => a._id < b._id);
+            savedAppointemnts.forEach((savedAppointemnt, i) => {
+              assert.deepEqual(savedAppointemnt._id, gotAppointemnts[i]._id);
+            })
           });
       });
   })
