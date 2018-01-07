@@ -24,7 +24,21 @@ describe('Appointments API', () => {
     assert.equal(errors.fulfilled.kind, 'required');
   });
 
-  
+  it('Should throw errors for incorrect data types', () => {
+    const appointment = new Appointment({
+        service: {},
+        user: {},
+        date: {},
+        fulfilled: {}
+    });
+    const { errors } = appointment.validateSync();
+    assert.equal(errors.service.kind, 'String');
+    assert.equal(errors.user.kind, 'String');
+    assert.equal(errors.date.kind, 'Date');
+    assert.equal(errors.fulfilled.kind, 'Boolean');
+  });
+
+
 
 
 
