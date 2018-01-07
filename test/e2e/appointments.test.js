@@ -77,7 +77,7 @@ describe('Appointments API', () => {
           .then(({ body: gotAppointemnts}) => {
             gotAppointemnts = gotAppointemnts.sort((a, b) => a._id < b._id);
             savedAppointemnts = saveAppointemnts.sort((a, b) => a._id < b._id);
-            assert.deepEqual(savedAppointemnts, gotAppointemnts);
+            assert.deepEqual(savedAppointemnts, gotAppointemnts
           });
       });
   })
