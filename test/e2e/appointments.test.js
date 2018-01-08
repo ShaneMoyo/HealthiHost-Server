@@ -85,7 +85,7 @@ describe('Appointments API', () => {
   });
 
   it('Should get a appointment by id with admin token', () => {
-    return request.post('/api/appointment')
+    return request.post('/api/appointments')
       .set('Authorization', token)
       .send(testAppointments[0])
       .then(({ body: savedAppointemnt }) => {
