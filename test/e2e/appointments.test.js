@@ -120,15 +120,14 @@ describe('Appointments API', () => {
           .send(testAppointments[0])
           .then(({ body: savedAppointemnt }) => savedAppointemnt)
           .then(savedAppointemnt => {
-              return request.put(`/api/appointments/${savedAppointemnt._id}`)
+              testAppointments[1].user = savedAppointemnt.user;
+              return request.put(`/api/appointments/me/${savedAppointemnt._id}`)
                   .set('Authorization', token)
                   .send(testAppointments[1]);
           })
           .then(({ body: updatedAppointemnt }) => {
               assert.deepEqual(updatedAppointemnt.service, testAppointments[1].service);
-              assert.deepEqual(updatedAppointemnt.date, testAppointments[1].date);
               assert.deepEqual(updatedAppointemnt.fulfilled, testAppointments[0].fulfilled);
-              
           });
   
   })
