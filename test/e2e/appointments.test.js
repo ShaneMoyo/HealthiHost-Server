@@ -112,6 +112,6 @@ describe('Appointments API', () => {
             assert.deepEqual(gotAppointemnts, []);
           });  
     });
-  })
+  });
 
 })
