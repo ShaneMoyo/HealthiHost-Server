@@ -82,7 +82,22 @@ describe('Appointments API', () => {
             })
           });
       });
+  });
+
+  it('Should get a appointment by id with admin token', () => {
+    return request.post('/api/appointment')
+      .set('Authorization', token)
+      .send(testAppointments[0])
+      .then(({ body: savedAppointemnt }) => {
+        return request.get(`/api/${savedAppointemnt._id}`)
+          .set('Authorization', adminToken)
+          .then(({ body: gotAppointemnt }) => {
+            assert.deepEqual(gotAppointemnt._id, savedAppointemnt._id)
+          })
+      });
   })
+
+
 
 
 })
