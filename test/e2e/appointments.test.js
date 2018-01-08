@@ -152,6 +152,24 @@ describe('Appointments API', () => {
       });
   });
 
+  it('Should update an appointment by id with admin token', () => {
+    return request.post('/api/appointments')
+        .set('Authorization', token)
+        .send(testAppointments[0])
+        .then(({ body: savedAppointemnt }) => savedAppointemnt)
+        .then(savedAppointemnt => {
+            return request.put(`/api/appointments/${savedAppointemnt._id}`)
+                .set('Authorization', adminToken)
+                .send(testAppointments[1]);
+        })
+        .then(({ body: updatedAppointemnt }) => {
+            assert.deepEqual(updatedAppointemnt.service, testAppointments[1].service);
+            assert.deepEqual(updatedAppointemnt.fulfilled, testAppointments[1].fulfilled);
+        });
+});
+
+
+
 
 
 
