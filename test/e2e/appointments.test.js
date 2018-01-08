@@ -89,7 +89,7 @@ describe('Appointments API', () => {
       .set('Authorization', token)
       .send(testAppointments[0])
       .then(({ body: savedAppointemnt }) => {
-        return request.get(`/api/${savedAppointemnt._id}`)
+        return request.get(`/api/appointments/${savedAppointemnt._id}`)
           .set('Authorization', adminToken)
           .then(({ body: gotAppointemnt }) => {
             assert.deepEqual(gotAppointemnt._id, savedAppointemnt._id)
