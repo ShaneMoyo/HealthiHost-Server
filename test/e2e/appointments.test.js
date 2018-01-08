@@ -97,7 +97,21 @@ describe('Appointments API', () => {
       });
   })
 
-
-
+  it('Should delete an appointment with admin token', () => {
+    return request.post('/api/appointments')
+    .set('Authorization', token)
+    .send(testAppointments[0])
+    .then(({ body: savedAppointemnt }) => {
+      return request.delete(`/api/appointments/${savedAppointemnt._id}`)
+        .set('Authorization', adminToken)
+    })
+    .then(({ body: deleteResponse }) => {
+        return request.get('/api/appointments')
+          .set('Authorization', adminToken)
+          .then(({ body: gotAppointemnts}) => {
+            assert.deepEqual(gotAppointemnts, []);
+          });  
+    });
+  })
 
 })
