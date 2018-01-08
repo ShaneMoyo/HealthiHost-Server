@@ -114,7 +114,7 @@ describe('Appointments API', () => {
     });
   });
 
-  it('Should update(limited) an appointment by id', () => {
+  it('Should update(limited) my appointment by id', () => {
       return request.post('/api/appointments')
           .set('Authorization', token)
           .send(testAppointments[0])
@@ -129,7 +129,30 @@ describe('Appointments API', () => {
               assert.deepEqual(updatedAppointemnt.service, testAppointments[1].service);
               assert.deepEqual(updatedAppointemnt.fulfilled, testAppointments[0].fulfilled);
           });
-  
-  })
+  });
+
+  it('Should get my appointments', () => {
+    return Promise.all([
+      request.post('/api/appointments')
+        .set('Authorization', token)
+        .send(testAppointments[0])
+        .then(({ body: savedAppointemnt }) => savedAppointemnt),
+      request.post('/api/appointments')
+        .set('Authorization', adminToken)
+        .send(testAppointments[1])
+        .then(({ body: savedAppointemnt }) => savedAppointemnt),
+    ])
+      .then(savedAppointemnts => {
+        return request.get('/api/appointments/me')
+          .set('Authorization', token)
+          .then(({ body: gotAppointemnts}) => {
+            assert.deepEqual(savedAppointemnts[0]._id, gotAppointemnts[0]._id);
+            assert.equal(gotAppointemnts.length, 1)
+          });
+      });
+  });
+
+
+
 
 })
