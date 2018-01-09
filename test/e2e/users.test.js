@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const request = require('./request');
 const assert = chai.assert;
 
-describe('Users API', () => {
+describe.only('Users API', () => {
 
   let token = '';
   let admintoken = '';
@@ -31,5 +31,17 @@ describe('Users API', () => {
         .then(({ body })  => adminToken = body ),
       ]);
     })
+
+    it('Should get all users with admin role', () => {
+          return request.get('/api/users')
+            .set('Authorization', adminToken)
+            .then(({ body: gotUsers}) => {
+              gotUsers = gotUsers.sort((a, b) => a._id < b._id);
+              savedUsers = savedUsers.sort((a, b) => a._id < b._id);
+              savedUsers.forEach((savedUser, i) => {
+                assert.deepEqual(savedUser._id, gotUsers[i]._id);
+              })
+            });
+    });
   
 })
