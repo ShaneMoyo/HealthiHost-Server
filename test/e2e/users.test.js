@@ -39,4 +39,15 @@ describe.only('Users API', () => {
                 assert.equal(gotUsers.length, 2);
               })
     });
+
+    it('Should get my user account with valid token', () => {
+      return request.get('/api/verify')
+        .set('Authorization', token)
+        .then(({ body: myUserId }) => {
+          return request.get('/api/users/me')
+            .set('Authorization', token)
+            .then(({ body: gotAccount }) => gotAccount)
+            .then( gotAccount => assert.equal(myUserId, gotAccount._id))
+        })
+    })
 })
