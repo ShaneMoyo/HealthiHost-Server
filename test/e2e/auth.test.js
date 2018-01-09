@@ -81,8 +81,8 @@ describe('Auth API', () => {
             email: 'test@test.com',
             password: 'password'
         })
-        .then(({ body }) => {
-            assert.isOk(body.token);
+        .then(({ body: token }) => {
+            assert.isOk(token);
         });   
     });       
   });
