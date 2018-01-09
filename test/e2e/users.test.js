@@ -41,7 +41,7 @@ describe.only('Users API', () => {
     });
 
     it('Should get my user account with valid token', () => {
-      return request.get('/api/verify')
+      return request.get('/api/auth/verify')
         .set('Authorization', token)
         .then(({ body: myUserId }) => {
           return request.get('/api/users/me')
