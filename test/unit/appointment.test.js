@@ -2,7 +2,6 @@ const assert = require('chai').assert;
 const Appointment = require('../../lib/models/appointment');
 
 
-
 describe('Appointments Model', () => {
 
   it('Should validate a good model', () => {
